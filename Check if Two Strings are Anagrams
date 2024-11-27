@@ -1,0 +1,32 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+bool IsAnagram(std::string str1, std::string str2) {
+    std::transform(str1.begin(), str1.end(), str1.begin(), ::toupper);
+    std::transform(str2.begin(), str2.end(), str2.begin(), ::toupper);
+
+    str1.erase(std::remove(str1.begin(), str1.end(), ' '), str1.end());
+    str2.erase(std::remove(str2.begin(), str2.end(), ' '), str2.end());
+
+    std::sort(str1.begin(), str1.end());
+    std::sort(str2.begin(), str2.end());
+
+    return str1 == str2;
+}
+
+int main() {
+    std::string str1, str2;
+    std::cout << "Enter the first string: ";
+    std::cin >> str1;
+    std::cout << "Enter the second string: ";
+    std::cin >> str2;
+
+    if (IsAnagram(str1, str2)) {
+        std::cout << "'" << str1 << "' and '" << str2 << "' are anagrams." << std::endl;
+    } else {
+        std::cout << "'" << str1 << "' and '" << str2 << "' are NOT anagrams." << std::endl;
+    }
+
+    return 0;
+}
