@@ -1,0 +1,33 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+bool IsPalindrome(std::string str) {
+    std::transform(str.begin(), str.end(), str.begin(), ::toupper);
+    str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
+
+    int left = 0;
+    int right = str.length() - 1;
+
+    while (right > left) {
+        if (str[left++] != str[right--]) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+int main() {
+    std::string str;
+    std::cout << "Enter a string to check if it's a palindrome: ";
+    std::cin >> str;
+
+    if (IsPalindrome(str)) {
+        std::cout << "'" << str << "' is a palindrome." << std::endl;
+    } else {
+        std::cout << "'" << str << "' is NOT a palindrome." << std::endl;
+    }
+
+    return 0;
+}
