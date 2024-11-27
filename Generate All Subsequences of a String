@@ -1,0 +1,38 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <cmath>
+
+std::vector<std::string> GenerateSubsequences(const std::string& str) {
+    std::vector<std::string> vecString;
+    int strLen = str.size();
+    int bitCounter = std::pow(2, strLen);
+
+    for (int i = 1; i < bitCounter; ++i) {
+        std::string subsequence = "";
+
+        for (int j = 0; j < strLen; ++j) {
+            if (i & (1 << j)) {
+                subsequence += str[j];
+            }
+        }
+
+        vecString.push_back(subsequence);
+    }
+
+    return vecString;
+}
+
+int main() {
+    std::string str;
+    std::cout << "Enter a string: ";
+    std::cin >> str;
+
+    std::vector<std::string> subsequences = GenerateSubsequences(str);
+    std::cout << "All subsequences of '" << str << "':\n";
+    for (const auto& subseq : subsequences) {
+        std::cout << subseq << std::endl;
+    }
+
+    return 0;
+}
